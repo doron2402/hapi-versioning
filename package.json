@@ -29,5 +29,11 @@
     "mocha": "^2.3.2",
     "rewire": "^2.3.4",
     "time-grunt": "^1.2.1"
+  },
+  "pre-commit": {
+    "test"
+  },
+  "dependencies": {
+    "pre-commit": "^1.1.1"
   }
 }
