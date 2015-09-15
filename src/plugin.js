@@ -5,14 +5,18 @@ exports.register = function(plugin, options, next){
   var DEFAULT_HEADER_KEY = 'version';
   var DEFAULT_PATTERN = /^(v[1-9])$/;
   var versionHeader = options.header || DEFAULT_HEADER_KEY;
+	var pattern = options.pattern || DEFAULT_PATTERN;
+
   plugin.ext('onRequest', function(request, reply) {
     var urlPath = request.url.pathname.split('/');
     urlPath[0] === '' ? urlPath.shift() : null;
-    var pattern = options.pattern || DEFAULT_PATTERN;
-    if (pattern.test(request.headers[versionHeader]) && !pattern.test(urlPath[0])){
-      urlPath.unshift('',request.headers[versionHeader]);
+    var reqHeader = request.headers[versionHeader];
+
+    if (pattern.test(reqHeader) && !pattern.test(urlPath[0])){
+      urlPath.unshift('', reqHeader);
       request.setUrl(urlPath.join('/'));
     }
+
     reply.continue();
   });
   next();
