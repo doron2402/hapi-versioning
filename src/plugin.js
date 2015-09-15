@@ -5,7 +5,7 @@ exports.register = function(plugin, options, next){
   var DEFAULT_HEADER_KEY = 'version';
   var DEFAULT_PATTERN = /^(v[1-9])$/;
   var versionHeader = options.header || DEFAULT_HEADER_KEY;
-	var pattern = options.pattern || DEFAULT_PATTERN;
+  var pattern = options.pattern || DEFAULT_PATTERN;
 
   plugin.ext('onRequest', function(request, reply) {
     var urlPath = request.url.pathname.split('/');
