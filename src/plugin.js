@@ -15,7 +15,7 @@ exports.register = function(plugin, options, next){
 
     if (version && !pattern.test(urlPath[0])){
       urlPath.unshift('', version[1]);
-      request.setUrl(urlPath.join('/'));
+      request.setUrl(urlPath.join('/') + (request.url.search || ''));
     }
 
     reply.continue();
