@@ -11,9 +11,10 @@ exports.register = function(plugin, options, next){
     var urlPath = request.url.pathname.split('/');
     urlPath[0] === '' ? urlPath.shift() : null;
     var reqHeader = request.headers[versionHeader];
+    var version = reqHeader.match(pattern);
 
-    if (pattern.test(reqHeader) && !pattern.test(urlPath[0])){
-      urlPath.unshift('', reqHeader);
+    if (version && !pattern.test(urlPath[0])){
+      urlPath.unshift('', version[1]);
       request.setUrl(urlPath.join('/'));
     }
 
